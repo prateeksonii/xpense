@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Auth, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
+import { Firestore, addDoc, setDoc, doc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { IUser } from '../interfaces/IUser';
 
 @Component({
   selector: 'app-home',
@@ -8,13 +11,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  googleProvider = new GoogleAuthProvider();
-
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   async handleSignIn() {
     try {
-      await signInWithPopup(this.auth, this.googleProvider);
+      await this.auth.signIn();
       this.router.navigate(['dashboard'], { replaceUrl: true });
     } catch (err) {
       console.log(err);

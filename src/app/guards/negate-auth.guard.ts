@@ -27,6 +27,8 @@ export class NegateAuthGuard implements CanActivate {
     return new Promise((resolve) =>
       this.auth.onAuthStateChanged(
         (user) => {
+          console.log(user);
+
           if (user !== null) return resolve(this.router.parseUrl(''));
           return resolve(true);
         },
