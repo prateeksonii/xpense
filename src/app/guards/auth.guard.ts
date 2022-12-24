@@ -24,11 +24,16 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     return new Promise((resolve) =>
-      this.auth.onAuthStateChanged((user) => {
-        if (!!user) return resolve(true);
-        this.router.navigate([''], { replaceUrl: true });
-        return resolve(false);
-      })
+      this.auth.onAuthStateChanged(
+        (user) => {
+          if (user !== null) return resolve(true);
+          return resolve(this.router.parseUrl(''));
+        },
+        (err) => {
+          console.log(err);
+          return resolve(false);
+        }
+      )
     );
   }
 }

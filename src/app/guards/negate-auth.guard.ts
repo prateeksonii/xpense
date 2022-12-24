@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -13,7 +14,7 @@ import { AuthGuard } from './auth.guard';
   providedIn: 'root',
 })
 export class NegateAuthGuard implements CanActivate {
-  constructor(private authGuard: AuthGuard, private router: Router) {}
+  constructor(private auth: Auth, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,14 +24,16 @@ export class NegateAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return new Promise(async (resolve) => {
-      const isLoggedIn = await this.authGuard.canActivate(route, state);
-      if (isLoggedIn) {
-        this.router.navigate(['dashboard'], { replaceUrl: true });
-        return resolve(false);
-      }
-
-      return resolve(true);
-    });
+    return new Promise((resolve) =>
+      this.auth.onAuthStateChanged(
+        (user) => {
+          if (user !== null) return resolve(this.router.parseUrl(''));
+          return resolve(true);
+        },
+        (err) => {
+          return resolve(false);
+        }
+      )
+    );
   }
 }
