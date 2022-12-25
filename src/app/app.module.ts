@@ -19,7 +19,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

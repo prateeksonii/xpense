@@ -1,6 +1,13 @@
 <app-dashboard-nav></app-dashboard-nav>
-<div class="mx-auto container py-8">
-  <div *ngIf="expenses.length === 0">
-    No expenses yet
+<div class="mx-auto container p-4 h-[calc(100vh-4rem)]">
+  <div *ngIf="expenses.length === 0" class="text-xl h-full flex items-center justify-center gap-2">
+    No expenses yet. Click
+    <ng-icon name="heroPlusCircleSolid" class="hover:text-emerald-700 transition-all" size="2rem"></ng-icon>
+    to add one
   </div>
+
+  <button class="absolute bottom-4 right-4">
+    <ng-icon name="heroPlusCircleSolid" class="text-emerald-600 hover:text-emerald-700 transition-all"
+      size="4rem"></ng-icon>
+  </button>
 </div>
