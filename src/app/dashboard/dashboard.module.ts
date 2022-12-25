@@ -11,10 +11,17 @@ import {
 } from '@ng-icons/heroicons/solid';
 import { NgIconComponent } from '@ng-icons/core';
 import { AddComponent } from './add/add.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HomeComponent, NavComponent, AddComponent],
-  imports: [CommonModule, DashboardRoutingModule, NgIconComponent],
+  imports: [
+    CommonModule,
+    DashboardRoutingModule,
+    NgIconComponent,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [provideIcons({ heroPlusCircleSolid, heroArrowLeftCircleSolid })],
 })
 export class DashboardModule {}

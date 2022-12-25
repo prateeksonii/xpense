@@ -3,7 +3,7 @@ import { Auth } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { GoogleAuthProvider, signInWithPopup } from '@firebase/auth';
 import { setDoc } from '@firebase/firestore';
-import { IUser } from './interfaces/IUser';
+import { IUser } from '../interfaces/IUser';
 
 @Injectable({
   providedIn: 'root',

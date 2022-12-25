@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-import { Auth, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
-import { Firestore, addDoc, setDoc, doc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
-import { IUser } from '../interfaces/IUser';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
