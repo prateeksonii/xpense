@@ -16,26 +16,12 @@ import { AuthGuard } from './auth.guard';
 export class NegateAuthGuard implements CanActivate {
   constructor(private auth: Auth, private router: Router) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
     return new Promise((resolve) =>
-      this.auth.onAuthStateChanged(
-        (user) => {
-          console.log(user);
-
-          if (user !== null) return resolve(this.router.parseUrl(''));
-          return resolve(true);
-        },
-        (err) => {
-          return resolve(false);
-        }
-      )
+      this.auth.onAuthStateChanged((user) => {
+        if (user !== null) return resolve(this.router.parseUrl('/dashboard'));
+        return resolve(true);
+      })
     );
   }
 }
