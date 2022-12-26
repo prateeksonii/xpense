@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-dashboard-nav',
@@ -8,9 +9,16 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
   isHome = true;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private auth: AuthService) {}
 
   ngOnInit() {
     this.isHome = this.router.url === '/dashboard';
+  }
+
+  signOut() {
+    this.auth
+      .signOut()
+      .then(() => this.router.navigate(['.']))
+      .catch((err) => console.log(err));
   }
 }

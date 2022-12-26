@@ -6,7 +6,7 @@
     to add one
   </div>
 
-  <div class="mb-2">
+  <div *ngIf="expenses.length > 0" class="mb-2">
     <h4 class="text-sm">Balance</h4>
     <div class="text-3xl" [ngClass]="balance >= 0 ? 'text-green-600' : 'text-red-500'">{{balance | currency:'INR'}}
     </div>
