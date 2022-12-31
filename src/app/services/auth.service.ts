@@ -19,6 +19,7 @@ export class AuthService {
     return setDoc(doc(this.store, 'users', user.uid), {
       email: user.email!,
       name: user.displayName || 'Anonymous',
+      categories: [''],
     } as IUser);
   }
 
