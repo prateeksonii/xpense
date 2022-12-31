@@ -19,12 +19,18 @@ import { AuthService } from './auth.service';
 export class ExpenseService {
   constructor(private store: Firestore, private auth: AuthService) {}
 
-  async addExpense(title: string, amount: number, type: string) {
+  async addExpense(
+    title: string,
+    amount: number,
+    type: string,
+    categoryId: string | null
+  ) {
     const user = await this.auth.getCurrentUser();
     return addDoc(collection(this.store, 'expenses', user!.uid, 'expenses'), {
       title,
       amount,
       type,
+      categoryId,
       timestamp: serverTimestamp(),
     });
   }

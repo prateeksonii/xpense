@@ -12,9 +12,15 @@ import {
 import { NgIconComponent } from '@ng-icons/core';
 import { AddComponent } from './add/add.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddCategoryComponent } from './category/add/add.component';
 
 @NgModule({
-  declarations: [HomeComponent, NavComponent, AddComponent],
+  declarations: [
+    HomeComponent,
+    NavComponent,
+    AddComponent,
+    AddCategoryComponent,
+  ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
