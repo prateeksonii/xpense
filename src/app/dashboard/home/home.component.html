@@ -1,9 +1,7 @@
 <app-dashboard-nav></app-dashboard-nav>
 <div class="container">
-  <div *ngIf="expenses.length === 0" class="text-xl h-full flex items-center justify-center gap-2">
-    No expenses yet. Click
-    <mat-icon>add</mat-icon>
-    to add one
+  <div *ngIf="expenses.length === 0" class="empty">
+    No expenses yet. Click + to add one
   </div>
 
   <div *ngIf="expenses.length > 0">
@@ -11,15 +9,34 @@
     <div class="balance" mdcol [ngClass]="balance >= 0 ? 'green' : 'red'">{{balance | currency:'INR'}}
     </div>
   </div>
-
-  <mat-nav-list class="expenses">
-    <a mat-list-item *ngFor="let expense of expenses;" class="list-item">
-      <span>{{ expense.title }}</span>
-      <span class="spacer"></span>
-      <span [ngClass]="expense.type === 'spent' ? 'red' : 'green'">{{ expense.amount | currency:'INR'
-        }}</span>
-    </a>
-  </mat-nav-list>
+  <mat-tab-group>
+    <mat-tab label="All">
+      <mat-nav-list class="expenses">
+        <a mat-list-item *ngFor="let expense of expenses;" class="list-item">
+          <span>{{ expense.title }}</span>
+          <span class="spacer"></span>
+          <span [ngClass]="expense.type === 'debit' ? 'red' : 'green'">{{ expense.amount | currency:'INR'
+            }}</span>
+        </a>
+      </mat-nav-list>
+    </mat-tab>
+    <mat-tab label="Debit"><mat-nav-list class="expenses">
+        <a mat-list-item *ngFor="let expense of debits;" class="list-item">
+          <span>{{ expense.title }}</span>
+          <span class="spacer"></span>
+          <span>{{ expense.amount | currency:'INR'
+            }}</span>
+        </a>
+      </mat-nav-list></mat-tab>
+    <mat-tab label="Credit"><mat-nav-list class="expenses">
+        <a mat-list-item *ngFor="let expense of credits;" class="list-item">
+          <span>{{ expense.title }}</span>
+          <span class="spacer"></span>
+          <span>{{ expense.amount | currency:'INR'
+            }}</span>
+        </a>
+      </mat-nav-list></mat-tab>
+  </mat-tab-group>
 
   <a mat-fab class="add-btn" routerLink="add">
     <mat-icon>add</mat-icon>

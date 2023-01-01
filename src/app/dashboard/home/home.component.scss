@@ -28,3 +28,7 @@ h4 {
 .red {
   color: mat.get-color-from-palette(mat.$red-palette, 500);
 }
+
+.empty {
+  padding: 1rem 0;
+}
