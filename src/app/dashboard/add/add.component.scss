@@ -4,6 +4,14 @@ form {
 }
 
 .add-category-btn {
+  margin-left: auto;
   width: max-content;
   margin-bottom: 2rem;
+}
+
+.container {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
