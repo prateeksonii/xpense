@@ -1,6 +1,5 @@
 <mat-toolbar color="primary">
-  <ng-icon routerLink=".." *ngIf="!isHome" name="heroArrowLeftCircleSolid"
-    class="text-zinc-100 hover:text-emerald-700 transition-all" size="2rem"></ng-icon>
+  <a routerLink="/dashboard" mat-icon-button *ngIf="!isHome"><mat-icon>arrow_back</mat-icon></a>
   <span class="text-lg font-extrabold tracking-widest text-emerald-400">XPENSE</span>
   <span class="nav-spacer"></span>
   <button mat-flat-button (click)="signOut()">Sign out</button>
