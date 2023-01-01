@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
 h4 {
   padding-top: 1rem;
   font-size: 1.2rem;
@@ -16,4 +19,12 @@ h4 {
   position: absolute;
   bottom: 2rem;
   right: 2rem;
+}
+
+.green {
+  color: mat.get-color-from-palette(mat.$green-palette, 500);
+}
+
+.red {
+  color: mat.get-color-from-palette(mat.$red-palette, 500);
 }
