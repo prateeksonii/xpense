@@ -1,2 +1,14 @@
-html, body { height: 100%; background-color: #0D1821; color: white; }
+html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container {
+  width: 90%;
+  margin: auto;
+  min-height: calc(100vh - 64px);
+}
+
+.expenses .mdc-list-item__content > span {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,30 +1,32 @@
 <app-dashboard-nav></app-dashboard-nav>
 <div class="mx-auto container p-4 min-h-[calc(100vh-4rem)] flex flex-col justify-center">
   <h1 class="text-3xl font-bold">Add a new expense</h1>
-  <form [formGroup]="fb" class="flex flex-col gap-3 my-8" (ngSubmit)="onSubmit()">
-    <div class="flex flex-col justify-center">
-      <label for="title">Title</label>
-      <input type="text" id="title" name="title" formControlName="title" class="bg-zinc-800 rounded">
-    </div>
-    <div class="flex flex-col justify-center">
-      <label for="amount">Amount</label>
-      <input type="number" id="amount" name="amount" formControlName="amount" class="bg-zinc-800 rounded">
-    </div>
-    <div class="flex flex-col justify-center">
-      <label for="type">Type</label>
-      <select name="type" id="type" formControlName="type" class="bg-zinc-800 rounded">
-        <option value="debit">Debit</option>
-        <option value="credit">Credit</option>
-      </select>
-    </div>
-    <div class="flex flex-col justify-center">
-      <label for="category">Category</label>
-      <select name="category" id="type" formControlName="category" class="bg-zinc-800 rounded">
-        <option *ngFor="let category of categories;" [value]="category.id">{{category['name']}}</option>
-      </select>
-      <a routerLink="../category/add" class="w-max mt-1 text-sm text-green-600">Create new category</a>
-    </div>
-    <button [disabled]="!fb.valid" type="submit"
+  <form [formGroup]="fb" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label for="title">Title</mat-label>
+      <input matInput placeholder="Title" type="text" id="title" name="title" formControlName="title">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label for="amount">Amount</mat-label>
+      <input matInput type="number" id="amount" name="amount" formControlName="amount" class="bg-zinc-800 rounded">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label for="type">Type</mat-label>
+      <mat-select name="type" id="type" formControlName="type" class="bg-zinc-800 rounded">
+        <mat-option value="debit">Debit</mat-option>
+        <mat-option value="credit">Credit</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label for="category">Category</mat-label>
+      <mat-select name="category" id="category" formControlName="category" class="bg-zinc-800 rounded">
+        <mat-option *ngFor="let category of categories;" [value]="category.id">{{category['name']}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button class="add-category-btn" mat-flat-button (click)="openDialog()">Create new category</button>
+
+    <button mat-raised-button color="primary" [disabled]="!fb.valid" type="submit"
       class="p-2 w-full bg-emerald-600 rounded mt-2 font-bold disabled:bg-zinc-800">Add</button>
   </form>
 </div>

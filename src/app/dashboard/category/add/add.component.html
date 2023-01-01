@@ -1,12 +1,11 @@
-<app-dashboard-nav></app-dashboard-nav>
-<div class="mx-auto container p-4 min-h-[calc(100vh-4rem)] flex flex-col justify-center">
-  <h1 class="text-3xl font-bold">Add a new category</h1>
-  <form [formGroup]="fb" class="flex flex-col gap-3 my-8" (ngSubmit)="onSubmit()">
-    <div class="flex flex-col justify-center">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" formControlName="name" class="bg-zinc-800 rounded">
-    </div>
-    <button [disabled]="!fb.valid" type="submit"
+<h1 mat-dialog-title class="text-3xl font-bold">Add a new category</h1>
+<form mat-dialog-content [formGroup]="fb" class="flex flex-col gap-3 my-8" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline">
+    <mat-label for="name">Name</mat-label>
+    <input matInput type="text" id="name" name="name" formControlName="name" class="bg-zinc-800 rounded">
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" [disabled]="!fb.valid" type="submit"
       class="p-2 w-full bg-emerald-600 rounded mt-2 font-bold disabled:bg-zinc-800">Add</button>
-  </form>
-</div>
+  </div>
+</form>

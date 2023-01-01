@@ -1,5 +1,5 @@
 <app-dashboard-nav></app-dashboard-nav>
-<div class="mx-auto container p-4 h-[calc(100vh-4rem)]">
+<div class="container">
   <div *ngIf="expenses.length === 0" class="text-xl h-full flex items-center justify-center gap-2">
     No expenses yet. Click
     <ng-icon name="heroPlusCircleSolid" class="hover:text-emerald-700 transition-all" size="2rem"></ng-icon>
@@ -7,21 +7,21 @@
   </div>
 
   <div *ngIf="expenses.length > 0" class="mb-2">
-    <h4 class="text-sm">Balance</h4>
-    <div class="text-3xl" [ngClass]="balance >= 0 ? 'text-green-600' : 'text-red-500'">{{balance | currency:'INR'}}
+    <h4>Balance</h4>
+    <div class="balance" [ngClass]="balance >= 0 ? 'text-green-600' : 'text-red-500'">{{balance | currency:'INR'}}
     </div>
   </div>
 
-  <ul class="space-y-2">
-    <li *ngFor="let expense of expenses;" class="p-2 bg-zinc-800 rounded flex items-center justify-between">
-      <div>{{ expense.title }}</div>
-      <div [ngClass]="expense.type === 'spent' ? 'text-red-600' : 'text-green-600'">{{ expense.amount | currency:'INR'
-        }}</div>
-    </li>
-  </ul>
+  <mat-nav-list class="expenses">
+    <a mat-list-item *ngFor="let expense of expenses;" class="list-item">
+      <span>{{ expense.title }}</span>
+      <span class="spacer"></span>
+      <span [ngClass]="expense.type === 'spent' ? 'text-red-600' : 'text-green-600'">{{ expense.amount | currency:'INR'
+        }}</span>
+    </a>
+  </mat-nav-list>
 
-  <a class="absolute bottom-4 right-4" routerLink="add">
-    <ng-icon name="heroPlusCircleSolid" class="text-emerald-600 hover:text-emerald-700 transition-all"
-      size="4rem"></ng-icon>
+  <a mat-fab class="add-btn" routerLink="add">
+    <mat-icon>add</mat-icon>
   </a>
 </div>

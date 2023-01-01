@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/services/category.service';
 
@@ -16,14 +17,14 @@ export class AddCategoryComponent {
 
   constructor(
     private categoryService: CategoryService,
-    private location: Location
+    private dialogRef: MatDialogRef<AddCategoryComponent>
   ) {}
 
   onSubmit() {
     if (this.fb.valid) {
       this.categoryService
         .create(this.fb.get('name')!.value!)
-        .then((_) => this.location.back());
+        .then((_) => this.dialogRef.close({ ok: true }));
     }
   }
 }
