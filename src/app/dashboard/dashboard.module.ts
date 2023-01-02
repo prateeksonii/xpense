@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSelectModule,
     MatDialogModule,
     MatTabsModule,
+    MatChipsModule,
   ],
   providers: [provideIcons({ heroPlusCircleSolid, heroArrowLeftCircleSolid })],
 })

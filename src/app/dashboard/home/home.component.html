@@ -3,7 +3,6 @@
   <div *ngIf="expenses.length === 0" class="empty">
     No expenses yet. Click + to add one
   </div>
-
   <div *ngIf="expenses.length > 0">
     <h4>Balance</h4>
     <div class="balance" mdcol [ngClass]="balance >= 0 ? 'green' : 'red'">{{balance | currency:'INR'}}
@@ -11,31 +10,42 @@
   </div>
   <mat-tab-group>
     <mat-tab label="All">
-      <mat-nav-list class="expenses">
-        <a mat-list-item *ngFor="let expense of expenses;" class="list-item">
-          <span>{{ expense.title }}</span>
-          <span class="spacer"></span>
-          <span [ngClass]="expense.type === 'debit' ? 'red' : 'green'">{{ expense.amount | currency:'INR'
+      <mat-chip-listbox multiple (change)="handleChange($event)">
+        <mat-chip-option *ngFor="let category of categories;" [value]="category.id">{{ category.name
+          }}</mat-chip-option>
+      </mat-chip-listbox>
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let expense of expenses;">
+          <span matListItemTitle>{{ expense.title }}</span>
+          <span matListItemLine>{{ expense.timestamp.toDate() | date:'short' }}</span>
+          <span [ngClass]="expense.type === 'debit' ? 'red' : 'green'">{{
+            expense.amount | currency:'INR'
             }}</span>
         </a>
       </mat-nav-list>
     </mat-tab>
-    <mat-tab label="Debit"><mat-nav-list class="expenses">
-        <a mat-list-item *ngFor="let expense of debits;" class="list-item">
-          <span>{{ expense.title }}</span>
-          <span class="spacer"></span>
-          <span>{{ expense.amount | currency:'INR'
+    <mat-tab label="Debit">
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let expense of debits;">
+          <span matListItemTitle>{{ expense.title }}</span>
+          <span matListItemLine>{{ expense.timestamp.toDate() | date:'short' }}</span>
+          <span>{{
+            expense.amount | currency:'INR'
             }}</span>
         </a>
-      </mat-nav-list></mat-tab>
-    <mat-tab label="Credit"><mat-nav-list class="expenses">
-        <a mat-list-item *ngFor="let expense of credits;" class="list-item">
-          <span>{{ expense.title }}</span>
-          <span class="spacer"></span>
-          <span>{{ expense.amount | currency:'INR'
+      </mat-nav-list>
+    </mat-tab>
+    <mat-tab label="Credit">
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let expense of credits;">
+          <span matListItemTitle>{{ expense.title }}</span>
+          <span matListItemLine>{{ expense.timestamp.toDate() | date:'short' }}</span>
+          <span>{{
+            expense.amount | currency:'INR'
             }}</span>
         </a>
-      </mat-nav-list></mat-tab>
+      </mat-nav-list>
+    </mat-tab>
   </mat-tab-group>
 
   <a mat-fab class="add-btn" routerLink="add">

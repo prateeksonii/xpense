@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatChipListboxChange } from '@angular/material/chips';
+import { forkJoin } from 'rxjs';
+import { CategoryService } from 'src/app/services/category.service';
 import { ExpenseService } from 'src/app/services/expense.service';
 
 @Component({
@@ -10,13 +13,32 @@ export class HomeComponent implements OnInit {
   expenses: any[] = [];
   debits: any[] = [];
   credits: any[] = [];
+  categories: any[] = [];
   balance = 0;
 
-  constructor(private expenseService: ExpenseService) {}
+  constructor(
+    private expenseService: ExpenseService,
+    private categoryService: CategoryService
+  ) {}
 
-  ngOnInit() {
-    this.expenseService.getExpenses().then((docs) => {
-      this.expenses = docs.docs.map((doc) => doc.data());
+  handleChange(event: MatChipListboxChange) {
+    this.getData(event.value);
+  }
+
+  async ngOnInit() {
+    this.categoryService.get().then(
+      (categories) =>
+        (this.categories = categories.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })))
+    );
+    this.getData();
+  }
+
+  getData(categories?: string[]) {
+    this.expenseService.getExpenses(categories).then((expenses) => {
+      this.expenses = expenses.docs.map((doc) => doc.data());
       this.debits = this.expenses.filter((expense) => expense.type === 'debit');
       this.credits = this.expenses.filter(
         (expense) => expense.type === 'credit'
